@@ -1,4 +1,4 @@
-import { TextInput, Flex, Stack, Text, Button, ActionIcon } from '@mantine/core'
+import { TextInput, Flex, Stack, Text, ActionIcon } from '@mantine/core'
 import { IconSearch, IconBrandGithub } from '@tabler/icons-react'
 import { useSearchStore } from '@/stores'
 import { useState } from 'react'
@@ -28,7 +28,7 @@ export const SearchBar = () => {
 				}}
 				disabled={status === 'loading'}
 				value={value}
-				placeholder="Try shrek, shrak, superman, suparman"
+				placeholder="Try shrek, shrak, superman, suparman, supar man, etc"
 				w="100%"
 				onChange={event => {
 					setValue(event.currentTarget.value)
