@@ -39,7 +39,12 @@ export const useSearchStore = persistent<{
 				set({ status: 'loading' })
 				try {
 					const data = await axios
-						.get<Data>(`${url}/getMovies?query=${query}`)
+						.get<Data>(`${url}/getMovies?query=${query}`, {
+							headers: {
+								Accept: 'application/json',
+								'Content-Type': 'application/json',
+							},
+						})
 						.then(res => {
 							return res.data
 						})
