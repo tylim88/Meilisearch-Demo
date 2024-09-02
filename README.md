@@ -4,6 +4,8 @@
 
 [endpoint code](https://github.com/tylim88/Voicefu-back-end/blob/main/src/router/getMovies.ts)
 
+[data](https://github.com/tylim88/Voicefu-back-end/blob/main/movies.json) (460k documents)
+
 ![homepage](./homepage.png)
 
 techs:
