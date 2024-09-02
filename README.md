@@ -4,6 +4,8 @@
 
 [endpoint code](https://github.com/tylim88/Voicefu-back-end/blob/main/src/router/getMovies.ts)
 
+![homepage](./homepage.png)
+
 techs:
 
 1. Meilisearch
