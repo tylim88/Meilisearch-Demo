@@ -1,7 +1,53 @@
 import { persistent } from './utils'
-import axios from 'axios'
 import { url } from '@/config'
+import { initClient, initContract } from '@ts-rest/core'
+import { z } from 'zod'
 
+export const c = initContract()
+
+const movieSchema = z.object({
+	time: z.number(),
+	movies: z.array(
+		z.object({
+			id: z.number().min(0),
+			title: z.string(),
+			overview: z.string(),
+			genres: z.array(z.string()),
+			poster: z.string(),
+			release_date: z.number(),
+		})
+	),
+})
+
+export const getMovies = {
+	method: 'GET',
+	path: '/getMovies',
+	query: z.object({
+		query: z.string(),
+	}),
+	contentType: 'application/json',
+	responses: {
+		200: movieSchema,
+		401: z.object({
+			message: z.string(),
+		}),
+		500: z.object({
+			message: z.string(),
+		}),
+	},
+} as const
+
+export const client = initClient(
+	c.router({
+		getMovies,
+	}),
+	{
+		baseUrl: url,
+		baseHeaders: {
+			'x-app-source': 'ts-rest',
+		},
+	}
+)
 const initialState = {
 	status: 'idle',
 	data: null,
@@ -38,18 +84,11 @@ export const useSearchStore = persistent<{
 				if (!query) return
 				set({ status: 'loading' })
 				try {
-					const data = await axios
-						.get<Data>(`${url}/getMovies?query=${query}`, {
-							headers: {
-								Accept: 'application/json',
-								'Content-Type': 'application/json',
-							},
-						})
-						.then(res => {
-							return res.data
-						})
-					set({ data })
-					set({ status: 'done' })
+					const data = await client.getMovies({ query: { query } })
+					if (data.status !== 200) {
+						throw 'something is wrong'
+					}
+					set({ data: data.body, status: 'done' })
 				} catch (e) {
 					set({ status: 'error' })
 					console.error(e)

@@ -1,2 +1,2 @@
 export const isProduction: boolean = true
-export const url = 'https://voicefu.com'
+export const url = 'https://api.voicefu.com'
