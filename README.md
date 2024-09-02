@@ -1,9 +1,14 @@
 # MeiliSearch Demo
 
+[demo](https://meilisearch-demo.pages.dev/)
+
+[endpoint code](https://github.com/tylim88/Voicefu-back-end/blob/main/src/router/getMovies.ts)
+
 techs:
 
-1. Typescript
-2. Mantine
-3. Vite
-4. Zustand
-5. Cloudflare
+1. Meilisearch
+2. Typescript
+3. Mantine
+4. Vite
+5. Zustand
+6. Cloudflare
